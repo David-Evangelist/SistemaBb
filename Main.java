@@ -114,7 +114,18 @@ public class Main {
                                 }
                                 break;
                             case 4:
-                                System.out.println("Opção 'Deletar Usuário' selecionada");
+                                System.out.println("===== Deletar Usuário =====");
+
+                                for (int i = 0; i < usuarios.size(); i++) {
+                                    Usuario uTemp = usuarios.get(i);
+
+                                    System.out.println("["+(i)+"]" + uTemp.getNome());
+                                }
+                                System.out.println("Digite o valor de referência: ");
+                                int ref = Integer.parseInt(sc1.nextLine());
+
+                                usuarios.remove(ref);
+
                                 break;
                             case 0:
                                 System.out.println("Voltando ao menu principal");
