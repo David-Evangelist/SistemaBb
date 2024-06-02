@@ -4,21 +4,18 @@
 
         //Atributos
         private int idUsuario;
-        private Date dataCadastro;
+        private Date dataCad;
 
         //Construtor
         public Usuario(String nome, Date dataNasc, String cpf, String rg, String telefone, String email, String cep, String cidade,
-                       String bairro, String logradouro, int idUsuario, Date dataCadastro) {
+                       String bairro, String logradouro, int idUsuario, Date dataCad) {
 
             super(nome, dataNasc, cpf, rg, telefone, email, cep, cidade, bairro, logradouro);
 
             this.idUsuario = idUsuario;
-            this.dataCadastro = dataCadastro;
+            this.dataCad = dataCad;
         }
 
-        public Usuario() {
-
-        }
 
         //Métodos
         public int getIdUsuario() {
@@ -28,11 +25,11 @@
             this.idUsuario= idUsuario;
         }
 
-        public Date getDataCadastro() {
-            return dataCadastro;
+        public Date getDataCad() {
+            return dataCad;
         }
-        public void setDataCadastro(Date dataCadastro) {
-            this.dataCadastro= dataCadastro;
+        public void setDataCad(Date dataCad) {
+            this.dataCad= dataCad;
         }
 
     }

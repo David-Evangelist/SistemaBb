@@ -20,10 +20,6 @@ public class Livro {
         this.tombo = tombo;
     }
 
-    public Livro() {
-
-    }
-
     //Métodos
     public String getTitulo() {
         return titulo;
