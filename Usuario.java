@@ -16,6 +16,10 @@
             this.dataCadastro = dataCadastro;
         }
 
+        public Usuario() {
+
+        }
+
         //Métodos
         public int getIdUsuario() {
             return idUsuario;
