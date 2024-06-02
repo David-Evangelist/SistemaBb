@@ -46,7 +46,7 @@ public class Main {
                                 System.out.println("Digite o nome: ");
                                 String nome = sc1.nextLine();
                                 System.out.println("Digite a data de nascimento (dd/MM/yyyy): ");
-                                String dataNascStr  = sc1.nextLine();
+                                String dataNascStr = sc1.nextLine();
                                 System.out.println("Digite o CPF: ");
                                 String cpf = sc1.nextLine();
                                 System.out.println("Digite o RG: ");
@@ -66,7 +66,7 @@ public class Main {
                                 System.out.println("Digite o ID do usuário: ");
                                 int idUsuario = Integer.parseInt(sc1.nextLine());
                                 System.out.println("Digite a data de cadastro (dd/MM/yyyy): ");
-                                String dataCadStr  = sc1.nextLine();
+                                String dataCadStr = sc1.nextLine();
 
                                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                                 Date dataNasc = null;
@@ -79,25 +79,25 @@ public class Main {
                                     break;
                                 }
 
-                                Usuario u = new Usuario(nome, dataNasc, cpf, rg, telefone, email, cep, cidade, bairro,logradouro, idUsuario, dataCad);
+                                Usuario u = new Usuario(nome, dataNasc, cpf, rg, telefone, email, cep, cidade, bairro, logradouro, idUsuario, dataCad);
 
                                 usuarios.add(u);
                                 break;
 
                             case 2:
                                 System.out.println("===== Buscar Usuário =====");
-                                System.out.println("Digite o id do usuário: ");
-                                int id = Integer.parseInt(sc1.nextLine());
+                                System.out.println("Digite o nome do usuário: ");
+                                String nomeB = sc1.nextLine();
                                 boolean encontrado = false;
 
                                 for (int i = 0; i < usuarios.size(); i++) {
 
                                     Usuario uTemp = usuarios.get(i);
 
-                                    if (id == (usuarios.get(i).getIdUsuario())) {
+                                    if (nomeB.equalsIgnoreCase(usuarios.get(i).getNome())) {
                                         System.out.println("Usuário encontrado: ");
-                                        System.out.println("\tID: " + uTemp.getIdUsuario());
                                         System.out.println("\tNome: " + uTemp.getNome());
+                                        System.out.println("\tID: " + uTemp.getIdUsuario());
                                         System.out.println("\tCPF: " + uTemp.getCpf());
                                         System.out.println("\tEmail: " + uTemp.getEmail());
                                         System.out.println("\tTelefone: " + uTemp.getTelefone());
@@ -118,11 +118,8 @@ public class Main {
                                 for (int i = 0; i < usuarios.size(); i++) {
                                     Usuario uTemp = usuarios.get(i);
 
-                                    System.out.println("Usuário " + (i+1) + ": ");
+                                    System.out.println("Usuário " + (i + 1) + ": ");
                                     System.out.println("\tNome: " + uTemp.getNome());
-                                    System.out.println("\tCPF: " + uTemp.getCpf());
-                                    System.out.println("\tID: " + uTemp.getIdUsuario());
-                                    System.out.println("\tCEP: " + uTemp.getCep());
                                 }
                                 break;
 
@@ -132,7 +129,7 @@ public class Main {
                                 for (int i = 0; i < usuarios.size(); i++) {
                                     Usuario uTemp = usuarios.get(i);
 
-                                    System.out.println("["+(i)+"]" + uTemp.getNome());
+                                    System.out.println("[" + (i) + "]" + uTemp.getNome());
                                 }
                                 System.out.println("Digite o valor de referência: ");
                                 int ref = Integer.parseInt(sc1.nextLine());
@@ -224,7 +221,7 @@ public class Main {
                                 for (int i = 0; i < livros.size(); i++) {
                                     Livro lTemp = livros.get(i);
 
-                                    System.out.println("\t"+ (i+1)+". " + lTemp.getTitulo());
+                                    System.out.println("\t" + (i + 1) + ". " + lTemp.getTitulo());
                                 }
                                 break;
                             case 4:
@@ -233,7 +230,7 @@ public class Main {
                                 for (int i = 0; i < livros.size(); i++) {
                                     Livro lTemp = livros.get(i);
 
-                                    System.out.println("["+(i)+"]" + lTemp.getTitulo());
+                                    System.out.println("[" + (i) + "] " + lTemp.getTitulo());
                                 }
                                 System.out.println("Digite o valor de referência: ");
                                 int ref = Integer.parseInt(sc1.nextLine());
