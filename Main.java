@@ -58,7 +58,7 @@ public class Main {
                                 String logradouro = sc1.nextLine();
                                 System.out.println("Digite o CEP: ");
                                 String cep = sc1.nextLine();
-                                System.out.println("Digite o id do usuário: ");
+                                System.out.println("Digite o ID do usuário: ");
                                 int idUsuario = Integer.parseInt(sc1.nextLine());
 
                                 Usuario u = new Usuario();
