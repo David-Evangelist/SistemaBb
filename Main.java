@@ -13,6 +13,7 @@ public class Main {
 
         ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
         ArrayList<Livro> livros = new ArrayList<Livro>();
+        ArrayList<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 
         System.out.println("\nSeja bem vindo à Biblioteca: ");
 
@@ -262,22 +263,22 @@ public class Main {
 
                         switch (opcaoSubMenu) {
                             case 1:
-                                System.out.println("Opção 'Realizar Empréstimo' selecionada");
+                                System.out.println("====== Realizar Empréstimo ======");
                                 break;
                             case 2:
-                                System.out.println("Opção 'Devolver Livro' selecionada");
+                                System.out.println("====== Devolver Livro ======");
                                 break;
                             case 3:
-                                System.out.println("Opção 'Listar Dispiníveis' selecionada");
+                                System.out.println("====== Listar Dispiníveis ======");
                                 break;
                             case 4:
-                                System.out.println("Opção 'Listar Usuários com Livros Emprestados' selecionada");
+                                System.out.println("====== Listar Usuários com Livros Emprestados ======");
                                 break;
                             case 0:
-                                System.out.println("Voltando ao menu principal");
+                                System.out.println("Voltando ao menu principal!");
                                 break;
                             default:
-                                System.out.println("Opção inválida");
+                                System.out.println("Opção inválida!");
                                 break;
                         }
                     }
@@ -288,7 +289,7 @@ public class Main {
                     break;
 
                 default:
-                    System.out.println("\nOpção inválida");
+                    System.out.println("\nOpção inválida!");
                     break;
             }
         }
