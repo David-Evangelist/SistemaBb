@@ -53,5 +53,4 @@ public class Emprestimo {
     public void setDataDevolucao(Date dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
-
 }

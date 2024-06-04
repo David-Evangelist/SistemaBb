@@ -10,6 +10,8 @@ public class Main {
         int opcaoSubMenu;
         Scanner sc = new Scanner(System.in);
         Scanner sc1 = new Scanner(System.in);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy");
 
         ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
         ArrayList<Livro> livros = new ArrayList<Livro>();
@@ -69,7 +71,6 @@ public class Main {
                                 System.out.println("Digite a data de cadastro (dd/MM/yyyy): ");
                                 String dataCadStr = sc1.nextLine();
 
-                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                                 Date dataNasc = null;
                                 Date dataCad = null;
                                 try {
@@ -81,7 +82,6 @@ public class Main {
                                 }
 
                                 Usuario u = new Usuario(nome, dataNasc, cpf, rg, telefone, email, cep, cidade, bairro, logradouro, idUsuario, dataCad);
-
                                 usuarios.add(u);
                                 break;
 
@@ -92,7 +92,6 @@ public class Main {
                                 boolean encontrado = false;
 
                                 for (int i = 0; i < usuarios.size(); i++) {
-
                                     Usuario uTemp = usuarios.get(i);
 
                                     if (nomeB.equalsIgnoreCase(usuarios.get(i).getNome())) {
@@ -107,7 +106,6 @@ public class Main {
                                         break;
                                     }
                                 }
-
                                 if (encontrado == false) {
                                     System.out.println("Usuário não encontrado!!");
                                 }
@@ -119,8 +117,7 @@ public class Main {
                                 for (int i = 0; i < usuarios.size(); i++) {
                                     Usuario uTemp = usuarios.get(i);
 
-                                    System.out.println("Usuário " + (i + 1) + ": ");
-                                    System.out.println("\tNome: " + uTemp.getNome());
+                                    System.out.println("\t" + (i + 1) + "- " + uTemp.getNome());
                                 }
                                 break;
 
@@ -177,19 +174,18 @@ public class Main {
                                 System.out.println("Digite o tombo: ");
                                 int tombo = Integer.parseInt(sc1.nextLine());
 
-                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
                                 Date ano = null;
                                 try {
-                                    ano = sdf.parse(anoStr);
+                                    ano = sdf1.parse(anoStr);
                                 } catch (ParseException e) {
                                     System.out.println("Formato de data inválido!");
                                     break;
                                 }
 
                                 Livro l = new Livro(titulo, autor, categoria, ano, situacao, tombo);
-
                                 livros.add(l);
                                 break;
+
                             case 2:
                                 System.out.println("===== Buscar Livro =====");
                                 System.out.println("Digite o título do livro: ");
@@ -197,7 +193,6 @@ public class Main {
                                 boolean encontrado = false;
 
                                 for (int i = 0; i < livros.size(); i++) {
-
                                     Livro lTemp = livros.get(i);
 
                                     if (titulol.equals(livros.get(i).getTitulo())) {
@@ -211,11 +206,11 @@ public class Main {
                                         break;
                                     }
                                 }
-
                                 if (encontrado == false) {
                                     System.out.println("Livro não encontrado!!");
                                 }
                                 break;
+
                             case 3:
                                 System.out.println("===== Lista de Livros =====");
 
@@ -225,6 +220,7 @@ public class Main {
                                     System.out.println("\t" + (i + 1) + ". " + lTemp.getTitulo());
                                 }
                                 break;
+
                             case 4:
                                 System.out.println("===== Deletar Livro =====");
 
@@ -238,6 +234,7 @@ public class Main {
 
                                 livros.remove(ref);
                                 break;
+
                             case 0:
                                 System.out.println("Voltando ao menu principal");
                                 break;
@@ -253,27 +250,152 @@ public class Main {
                     opcaoSubMenu = 99;
 
                     while (opcaoSubMenu != 0) {
-                        System.out.println("[1] Realizar Empréstimo");
+                        System.out.println("\n[1] Realizar Empréstimo");
                         System.out.println("[2] Devolver Livro");
                         System.out.println("[3] Listar Livros Disponíveis");
                         System.out.println("[4] Listar Usuários com Livros Emprestados");
+                        System.out.println("[5] Renovar Empréstimo");
                         System.out.println("[0] Voltar");
 
                         opcaoSubMenu = sc.nextInt();
 
                         switch (opcaoSubMenu) {
                             case 1:
-                                System.out.println("====== Realizar Empréstimo ======");
+                                System.out.println("========= Realizar Empréstimo =========");
+
+                                System.out.println("Digite o ID do usuário: ");
+                                int idUserEmprestimo = Integer.parseInt(sc1.nextLine());
+                                Usuario usuarioEmprestimo = null;
+
+                                for (Usuario uTemp : usuarios) {
+                                    if (uTemp.getIdUsuario() == idUserEmprestimo) {
+                                        usuarioEmprestimo = uTemp;
+                                        break;
+                                    }
+                                }
+                                if (usuarioEmprestimo == null) {
+                                    System.out.println("Usuário não encontrado!!");
+                                    break;
+                                }
+
+                                System.out.println("Digite o título do livro: ");
+                                String tituloEmprestimo = sc1.nextLine();
+                                Livro livroEmprestimo = null;
+
+                                for (Livro lTemp : livros) {
+                                    if (lTemp.getTitulo().equalsIgnoreCase(tituloEmprestimo) && lTemp.getSituacao().equalsIgnoreCase("disponivel")) {
+                                        livroEmprestimo = lTemp;
+                                        break;
+                                    }
+                                }
+                                if (livroEmprestimo == null) {
+                                    System.out.println("Livro não disponível ou não encontrado!!");
+                                    break;
+                                }
+
+                                System.out.println("Digite a data de reserva (dd/MM/yyyy): ");
+                                String dataReservaStr = sc1.nextLine();
+                                System.out.println("Digite a data de devolução (dd/MM/yyyy): ");
+                                String dataDevolucaoStr = sc1.nextLine();
+
+                                Date dataReserva = null;
+                                Date dataDevolucao = null;
+                                try {
+                                    dataReserva = sdf.parse(dataReservaStr);
+                                    dataDevolucao = sdf.parse(dataDevolucaoStr);
+                                } catch (ParseException e) {
+                                    System.out.println("Formato de data inválido!");
+                                    break;
+                                }
+
+                                int codReserva = emprestimos.size() + 1;
+                                Emprestimo emprestimo = new Emprestimo(codReserva, livroEmprestimo, usuarioEmprestimo, dataReserva, dataDevolucao);
+                                emprestimos.add(emprestimo);
+
+                                livroEmprestimo.setSituacao("indisponivel");
+                                System.out.println(codReserva);
+                                System.out.println("Empréstimo realizado!!");
                                 break;
+
                             case 2:
-                                System.out.println("====== Devolver Livro ======");
+                                System.out.println("========= Devolver Livro =========");
+
+                                System.out.println("Digite o código da reserva: ");
+                                int codReservaDevolucao = Integer.parseInt(sc1.nextLine());
+
+                                Emprestimo emprestimoDevolucao = null;
+                                for (Emprestimo eTemp : emprestimos) {
+                                    if (eTemp.getCodReserva() == codReservaDevolucao) {
+                                        emprestimoDevolucao = eTemp;
+                                        break;
+                                    }
+                                }
+                                if (emprestimoDevolucao == null) {
+                                    System.out.println("Empréstimo não encontrado!!");
+                                    break;
+                                }
+
+                                Livro livroDevolvido = emprestimoDevolucao.getLivro();
+                                livroDevolvido.setSituacao("disponivel");
+
+                                emprestimos.remove(emprestimoDevolucao);
+
+                                System.out.println("Livro devolvido com sucesso!");
                                 break;
+
                             case 3:
-                                System.out.println("====== Listar Dispiníveis ======");
+                                System.out.println("========= Listar Livros Disponíveis =========");
+
+                                for (Livro lTemp : livros) {
+                                    if (lTemp.getSituacao().equalsIgnoreCase("disponivel")) {
+                                        System.out.println("\nTítulo: " + lTemp.getTitulo());
+                                        System.out.println("Autor: " + lTemp.getAutor());
+                                    }
+                                }
                                 break;
+
                             case 4:
-                                System.out.println("====== Listar Usuários com Livros Emprestados ======");
+                                System.out.println("========= Listar Usuários com Livros Emprestados =========");
+
+                                for (Emprestimo eTemp : emprestimos) {
+                                    System.out.println("\nUsuário: " + eTemp.getUsuario().getNome() + " - Livro: " + eTemp.getLivro().getTitulo());
+                                }
                                 break;
+
+                            case 5:
+                                System.out.println("========= Renovar Empréstimo =========");
+
+                                System.out.println("Digite o código da reserva: ");
+                                int codReservaRenovacao = Integer.parseInt(sc1.nextLine());
+
+                                Emprestimo emprestimoRenovacao = null;
+                                for (Emprestimo eTemp : emprestimos) {
+                                    if (eTemp.getCodReserva() == codReservaRenovacao) {
+                                        emprestimoRenovacao = eTemp;
+                                        break;
+                                    }
+                                }
+
+                                if (emprestimoRenovacao == null) {
+                                    System.out.println("Empréstimo não encontrado!!");
+                                    break;
+                                }
+
+                                System.out.println("Digite a nova data de devolução (dd/MM/yyyy): ");
+                                String novaDataDevolucaoStr = sc1.nextLine();
+
+                                Date novaDataDevolucao = null;
+                                try {
+                                    novaDataDevolucao = sdf.parse(novaDataDevolucaoStr);
+                                } catch (ParseException e) {
+                                    System.out.println("Formato de data inválido!");
+                                    break;
+                                }
+
+                                emprestimoRenovacao.setDataDevolucao(novaDataDevolucao);
+                                System.out.println("Empréstimo renovado com sucesso!");
+                                break;
+
                             case 0:
                                 System.out.println("Voltando ao menu principal!");
                                 break;
@@ -283,11 +405,9 @@ public class Main {
                         }
                     }
                     break;
-
                 case 0:
                     System.out.println("\nAté a próxima!! ");
                     break;
-
                 default:
                     System.out.println("\nOpção inválida!");
                     break;

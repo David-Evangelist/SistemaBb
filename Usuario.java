@@ -14,6 +14,7 @@
 
             this.idUsuario = idUsuario;
             this.dataCad = dataCad;
+            idUsuario++;
         }
 
 
